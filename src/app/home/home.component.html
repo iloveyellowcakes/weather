@@ -1,0 +1,47 @@
+<main class="weather" *ngIf="weatherData">
+  <section class="weather__search">
+    <app-search (newItemEvent)="addItem($event)" ></app-search>
+  </section>
+
+  <section class="weather__upper">
+    <article class="weather__upper__local">
+      <span class="weather__upper__local__icon">
+        <i class="fas fa-location-dot"></i>
+      </span>
+      <p class="weather__upper__local__city">{{ test.city }}</p>
+    </article>
+
+    <article class="weather__upper__main">
+      <div class="weather__upper__main__temp">
+        <div>
+          <span class="">
+            <i [class]="icons"></i>
+          </span>
+          <span> {{ test.text }} </span>
+        </div>
+        <p class="weather__upper__main__temp__degree">
+          {{ test.temp.cur }}°C
+        </p>
+
+        <div>
+          <span class="weather__upper__main__temp__max-min">
+            <i class="fa-solid fa-angle-up"></i>
+            {{ weatherData.forecasts[0].high }}°C
+          </span>
+          <span class="weather__upper__main__temp__max-min">
+            <i class="fa-solid fa-angle-down"></i>
+            {{ weatherData.forecasts[0].low }}°C
+          </span>
+        </div>
+
+      </div>
+    </article>
+  </section>
+  <section class="weather__cards">
+    <app-card [weather]="weatherData" ></app-card>
+    <button type="button" class="weather__cards__btn">
+      Previsão para 5 dias
+    </button>
+  </section>
+
+</main>

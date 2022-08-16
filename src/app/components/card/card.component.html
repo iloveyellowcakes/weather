@@ -1,0 +1,13 @@
+<div  class="weather-card">
+  <div  *ngFor="let item of teste">
+    <h4 class="weather-card__title"> {{ item.day }} </h4>
+    <div class="weather-card__content">
+      <p>{{item.text}}</p>
+      <span class="weather-card__content__icons">
+        <i [class]="icons"></i>
+      </span>
+      <p class="weather-card__content__temp"> {{item.high}}°C </p>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,25 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 62.5%;
+
+  height: 100%;
+  width: 100%;
+}
+
+body {
+
+  background: rgb(226,136,25);
+  background: linear-gradient(185deg, rgba(226,136,25,1) 0%, rgba(253,230,45,1) 100%) no-repeat fixed;
+
+
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.6rem;
+
+  height: 100%;
+  width: 100%;
+}
