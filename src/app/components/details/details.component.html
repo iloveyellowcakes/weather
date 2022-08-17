@@ -1,0 +1,10 @@
+<section class="details" *ngIf="weather">
+  <p>{{weather.current.feelslike_c}}°C</p>
+  <p>{{weather.current.humidity}}%</p>
+  <p>{{weather.current.wind_kph}}km/h</p>
+  <p>{{weather.current.cloud}}</p>
+  <p>{{weather.current.uv}}</p>
+  <p>{{weather.forecast.forecastday[0].day.daily_chance_of_rain}}%</p>
+
+
+</section>

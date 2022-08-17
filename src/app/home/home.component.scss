@@ -74,6 +74,16 @@
       &__temp {
         display: grid;
         justify-items: center;
+
+        &__condition {
+          display: flex;
+          align-items: center;
+          justify-content: space-around;
+          max-width: 23rem;
+          line-height: 1.8rem;
+
+
+        }
         &__degree {
           font-size: 6.5rem;
           font-weight: 500;

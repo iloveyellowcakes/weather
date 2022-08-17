@@ -1,4 +1,4 @@
-<main class="weather" *ngIf="weatherData">
+<main class="weather" *ngIf="weatherData2">
   <section class="weather__search">
     <app-search (newItemEvent)="addItem($event)" ></app-search>
   </section>
@@ -8,29 +8,30 @@
       <span class="weather__upper__local__icon">
         <i class="fas fa-location-dot"></i>
       </span>
-      <p class="weather__upper__local__city">{{ test.city }}</p>
+      <p class="weather__upper__local__city">{{ test2.city }}</p>
+      <!-- <p>{{test2.country}}</p> -->
     </article>
 
     <article class="weather__upper__main">
       <div class="weather__upper__main__temp">
-        <div>
+        <div class="weather__upper__main__temp__condition">
           <span class="">
-            <i [class]="icons"></i>
+            <img [src]="test2.icon" alt="">
           </span>
-          <span> {{ test.text }} </span>
+          <span> {{ test2.text }} </span>
         </div>
         <p class="weather__upper__main__temp__degree">
-          {{ test.temp.cur }}°C
+          {{ test2.temp.cur | number: '1.0-0' }}°C
         </p>
 
         <div>
           <span class="weather__upper__main__temp__max-min">
             <i class="fa-solid fa-angle-up"></i>
-            {{ weatherData.forecasts[0].high }}°C
+            {{ test2.temp.max }}°C
           </span>
           <span class="weather__upper__main__temp__max-min">
             <i class="fa-solid fa-angle-down"></i>
-            {{ weatherData.forecasts[0].low }}°C
+            {{ test2.temp.min }}°C
           </span>
         </div>
 
@@ -38,10 +39,14 @@
     </article>
   </section>
   <section class="weather__cards">
-    <app-card [weather]="weatherData" ></app-card>
+    <app-card [weather]="weatherData2" ></app-card>
     <button type="button" class="weather__cards__btn">
       Previsão para 5 dias
     </button>
+  </section>
+
+  <section>
+    <app-details [weather]="weatherData2"></app-details>
   </section>
 
 </main>

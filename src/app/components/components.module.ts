@@ -4,6 +4,7 @@ import { SearchComponent } from './search/search.component';
 import { CardComponent } from './card/card.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DateComponent } from './date/date.component';
+import { DetailsComponent } from './details/details.component';
 
 
 
@@ -11,7 +12,8 @@ import { DateComponent } from './date/date.component';
   declarations: [
     SearchComponent,
     CardComponent,
-    DateComponent
+    DateComponent,
+    DetailsComponent
   ],
   imports: [
     CommonModule,
@@ -20,7 +22,8 @@ import { DateComponent } from './date/date.component';
   exports: [
     SearchComponent,
     CardComponent,
-    DateComponent
+    DateComponent,
+    DetailsComponent
   ]
 })
 export class ComponentsModule { }

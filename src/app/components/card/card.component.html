@@ -1,12 +1,12 @@
 <div  class="weather-card">
-  <div  *ngFor="let item of teste">
-    <h4 class="weather-card__title"> {{ item.day }} </h4>
+  <div  *ngFor="let item of weather.forecast.forecastday" >
+    <h4 class="weather-card__title" > {{ item.date }} </h4>
     <div class="weather-card__content">
-      <p>{{item.text}}</p>
+      <p>{{item.day.condition.text}}</p>
       <span class="weather-card__content__icons">
-        <i [class]="icons"></i>
+        <!-- <i [class]="icons"></i> -->
       </span>
-      <p class="weather-card__content__temp"> {{item.high}}°C </p>
+      <p class="weather-card__content__temp"> {{item.day.maxtemp_c}}°C </p>
     </div>
   </div>
 </div>
