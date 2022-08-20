@@ -1,185 +1,139 @@
 export interface Weather {
   location: Location
-  current_observation: CurrentObservation
-  forecasts: Forecast[]
+  current: Current
+  forecast: Forecast
 }
 
 export interface Location {
-  city: string
+  name: string
   region: string
-  woeid: number
   country: string
   lat: number
-  long: number
-  timezone_id: string
+  lon: number
+  tz_id: string
+  localtime_epoch: number
+  localtime: string
 }
 
-export interface CurrentObservation {
-  wind: Wind
-  atmosphere: Atmosphere
-  astronomy: Astronomy
+export interface Current {
+  last_updated_epoch: number
+  last_updated: string
+  temp_c: number
+  temp_f: number
+  is_day: number
   condition: Condition
-  pubDate: number
-}
-
-export interface Wind {
-  chill: number
-  direction: number
-  speed: number
-}
-
-export interface Atmosphere {
+  wind_mph: number
+  wind_kph: number
+  wind_degree: number
+  wind_dir: string
+  pressure_mb: number
+  pressure_in: number
+  precip_mm: number
+  precip_in: number
   humidity: number
-  visibility: number
-  pressure: number
-  rising: number
-}
-
-export interface Astronomy {
-  sunrise: string
-  sunset: string
+  cloud: number
+  feelslike_c: number
+  feelslike_f: number
+  vis_km: number
+  vis_miles: number
+  uv: number
+  gust_mph: number
+  gust_kph: number
 }
 
 export interface Condition {
-  code: number
   text: string
-  temperature: number
+  icon: string
+  code: number
 }
 
 export interface Forecast {
-  day: string
-  date: number
-  low: number
-  high: number
+  forecastday: Forecastday[]
+}
+
+export interface Forecastday {
+  date: string
+  date_epoch: number
+  day: Day
+  astro: Astro
+  hour: Hour[]
+}
+
+export interface Day {
+  maxtemp_c: number
+  maxtemp_f: number
+  mintemp_c: number
+  mintemp_f: number
+  avgtemp_c: number
+  avgtemp_f: number
+  maxwind_mph: number
+  maxwind_kph: number
+  totalprecip_mm: number
+  totalprecip_in: number
+  avgvis_km: number
+  avgvis_miles: number
+  avghumidity: number
+  daily_will_it_rain: number
+  daily_chance_of_rain: number
+  daily_will_it_snow: number
+  daily_chance_of_snow: number
+  condition: Condition2
+  uv: number
+}
+
+export interface Condition2 {
   text: string
+  icon: string
   code: number
 }
 
-// export interface Weather {
-//   queryCost: number
-//   latitude: number
-//   longitude: number
-//   resolvedAddress: string
-//   address: string
-//   timezone: string
-//   tzoffset: number
-//   description: string
-//   days: Day[]
-//   alerts: any[]
-//   stations: Stations
-//   currentConditions: CurrentConditions
-// }
+export interface Astro {
+  sunrise: string
+  sunset: string
+  moonrise: string
+  moonset: string
+  moon_phase: string
+  moon_illumination: string
+}
 
-// export interface Day {
-//   datetime: string
-//   datetimeEpoch: number
-//   tempmax: number
-//   tempmin: number
-//   temp: number
-//   feelslikemax: number
-//   feelslikemin: number
-//   feelslike: number
-//   dew: number
-//   humidity: number
-//   precip: number
-//   precipprob: number
-//   precipcover: number
-//   preciptype: any
-//   snow: number
-//   snowdepth: number
-//   windgust: number
-//   windspeed: number
-//   winddir: number
-//   pressure: number
-//   cloudcover: number
-//   visibility: number
-//   solarradiation: number
-//   solarenergy: number
-//   uvindex: number
-//   severerisk: number
-//   sunrise: string
-//   sunriseEpoch: number
-//   sunset: string
-//   sunsetEpoch: number
-//   moonphase: number
-//   conditions: string
-//   description: string
-//   icon: string
-//   stations: string[]
-//   source: string
-//   hours: Hour[]
-// }
+export interface Hour {
+  time_epoch: number
+  time: string
+  temp_c: number
+  temp_f: number
+  is_day: number
+  condition: Condition3
+  wind_mph: number
+  wind_kph: number
+  wind_degree: number
+  wind_dir: string
+  pressure_mb: number
+  pressure_in: number
+  precip_mm: number
+  precip_in: number
+  humidity: number
+  cloud: number
+  feelslike_c: number
+  feelslike_f: number
+  windchill_c: number
+  windchill_f: number
+  heatindex_c: number
+  heatindex_f: number
+  dewpoint_c: number
+  dewpoint_f: number
+  will_it_rain: number
+  chance_of_rain: number
+  will_it_snow: number
+  chance_of_snow: number
+  vis_km: number
+  vis_miles: number
+  gust_mph: number
+  gust_kph: number
+  uv: number
+}
 
-// export interface Hour {
-//   datetime: string
-//   datetimeEpoch: number
-//   temp: number
-//   feelslike: number
-//   humidity: number
-//   dew: number
-//   precip: number
-//   precipprob: number
-//   snow: number
-//   snowdepth: number
-//   preciptype: any
-//   windgust: number
-//   windspeed: number
-//   winddir: number
-//   pressure: number
-//   visibility: number
-//   cloudcover: number
-//   solarradiation: number
-//   solarenergy: any
-//   uvindex: number
-//   severerisk: number
-//   conditions: string
-//   icon: string
-//   stations: string[]
-//   source: string
-// }
-
-// export interface Stations {
-//   SBAX: Sbax
-// }
-
-// export interface Sbax {
-//   distance: number
-//   latitude: number
-//   longitude: number
-//   useCount: number
-//   id: string
-//   name: string
-//   quality: number
-//   contribution: number
-// }
-
-// export interface CurrentConditions {
-//   datetime: string
-//   datetimeEpoch: number
-//   temp: number
-//   feelslike: number
-//   humidity: number
-//   dew: number
-//   precip: number
-//   precipprob: any
-//   snow: number
-//   snowdepth: number
-//   preciptype: any
-//   windgust: any
-//   windspeed: number
-//   winddir: number
-//   pressure: number
-//   visibility: number
-//   cloudcover: number
-//   solarradiation: number
-//   solarenergy: number
-//   uvindex: number
-//   conditions: string
-//   icon: string
-//   stations: string[]
-//   sunrise: string
-//   sunriseEpoch: number
-//   sunset: string
-//   sunsetEpoch: number
-//   moonphase: number
-// }
+export interface Condition3 {
+  text: string
+  icon: string
+  code: number
+}

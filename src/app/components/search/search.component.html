@@ -5,7 +5,11 @@
     formControlName="search"
     class="search__input"
   >
-  <button type="submit" class="search__btn" (click)="addNewItem(myForm.get('search')?.value)" >
+  <button
+    type="submit"
+    class="search__btn"
+    (click)="addNewItem(myForm.get('search')?.value)"
+  >
     <i class="fa-solid fa-magnifying-glass search__btn__icon"></i>
   </button>
 </form>

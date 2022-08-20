@@ -1,13 +1,10 @@
-<div  class="weather-card">
-  <div  *ngFor="let item of weather.forecast.forecastday" >
-    <h4 class="weather-card__title" > {{ item.date }} </h4>
+<section class="weather-card">
+  <article *ngFor="let item of weather.forecast.forecastday">
+    <h4 class="weather-card__weekday">{{ item.date }}</h4>
     <div class="weather-card__content">
-      <p>{{item.day.condition.text}}</p>
-      <span class="weather-card__content__icons">
-        <!-- <i [class]="icons"></i> -->
-      </span>
-      <p class="weather-card__content__temp"> {{item.day.maxtemp_c}}°C </p>
+      <p class="weather-card__content__condition">{{ item.day.condition.text }}</p>
+      <img class="weather-card__content__icons" [src]="item.day.condition.icon" alt="" />
+      <p class="weather-card__content__temp">{{ item.day.maxtemp_c | number: '1.0-0'}}°C</p>
     </div>
-  </div>
-</div>
-
+  </article>
+</section>

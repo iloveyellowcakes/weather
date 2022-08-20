@@ -4,9 +4,9 @@
 
 export const environment = {
   production: false,
-  weatherApiBaseUrl: 'https://yahoo-weather5.p.rapidapi.com/weather',
+  weatherApiBaseUrl: 'https://weatherapi-com.p.rapidapi.com/forecast.json',
   XRapidAPIHostHeaderName: 'X-RapidAPI-Host',
-  XRapidAPIHostHeaderValue: 'yahoo-weather5.p.rapidapi.com',
+  XRapidAPIHostHeaderValue: 'weatherapi-com.p.rapidapi.com',
   XRapidAPIKeyHeaderName: 'X-RapidAPI-Key',
   XRapidAPIKeyHeaderValue: '64e3552041msh77d6ae8ccde5afbp1ae17djsn39e9b0eee6b9'
 };

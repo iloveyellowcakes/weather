@@ -1,13 +1,8 @@
-
 import { Component, OnInit } from '@angular/core';
-import { City } from '../models/citys';
-import { Weather } from '../models/weather';
-import { Weather2 } from '../models/weather2';
+
+import { Weather } from 'src/app/models/weather';
 import { WeatherService } from '../services/weather/weather.service';
 
-export interface teste {
-  name: string;
-}
 
 @Component({
   selector: 'app-home',
@@ -16,16 +11,11 @@ export interface teste {
 })
 export class HomeComponent implements OnInit {
 
+  cityName: string = 'Araxá';
 
-  cityName: string = 'Paris';
   weatherData!: Weather;
-  weatherData2!: Weather2;
-
-  test: any;
-  test2: any;
-  test4!: any[];
-  icons!: string;
-  test3!: City;
+  condition!: any;
+  color!: string;
 
   constructor(private weatherService: WeatherService) { }
 
@@ -34,106 +24,105 @@ export class HomeComponent implements OnInit {
     this.cityName = '';
   }
 
-  getData() {
-
-    for (let item of this.weatherData2.forecast.forecastday) {
+  getWeekDayName(): void {
+    for (let item of this.weatherData.forecast.forecastday) {
       let weatherDate = item.date;
       weatherDate = weatherDate.replace(/-/, '/').replace(/-/, '/');
       let finalDate = new Date(weatherDate);
       let day = finalDate.toLocaleString('en-us', { weekday: 'short' });
-
       item.date = day;
-
-
     }
-    console.log(this.weatherData2, 'd');
-
+    this.weatherData.forecast.forecastday[0].date = 'Today';
   }
 
-
-
-  addItem(newItem: string) {
-    console.log(newItem, 'teste2');
-    // this.weatherService.getCity(newItem)
-    // .subscribe({
-    //   next: (data: any) => {
-    //     this.test3 = data;
-    //     this.getWeatherData(this.test3.name);
-    //     this.cityName = this.test3.name;
-    //   }
-    // })
+  addItem(newItem: string): void {
     this.getWeatherData(newItem);
     this.cityName = newItem;
-
   }
 
-  getIcons(text: string) {
-    console.log(text, 'text');
-
-    if (text === 'Sunny') {
-      this.icons = 'fa-solid fa-sun';
-      console.log(this.icons, 'icons');
-    }
-
-    if (text === 'Partly Cloudy') {
-      this.icons = 'fa-solid fa-cloud';
-      console.log(this.icons, 'icons');
-    }
-  }
-
-  getWeatherData(cityname: string) {
-    this.weatherService.getWeatherData2(cityname)
-      .subscribe((data: Weather2) => {
-        this.weatherData2 = data;
-
-        this.test4 = this.weatherData2.forecast.forecastday;
-
-        console.log(this.test4);
-        this.getData();
+  private getWeatherData(cityName: string) {
+    this.weatherService.getWeatherData(cityName)
+      .subscribe((data: Weather) => {
+        this.weatherData = data;
 
 
-
-
-        this.test2 = {
+        this.condition = {
           temp: {
-            cur: this.weatherData2.current.temp_c,
-            feelsLike: this.weatherData2.current.feelslike_c,
-            max: this.weatherData2.forecast.forecastday[0].day.maxtemp_c,
-            min: this.weatherData2.forecast.forecastday[0].day.mintemp_c
+            cur: this.weatherData.current.temp_c,
+            feelsLike: this.weatherData.current.feelslike_c,
+            max: this.weatherData.forecast.forecastday[0].day.maxtemp_c,
+            min: this.weatherData.forecast.forecastday[0].day.mintemp_c
 
           },
-          text: this.weatherData2.current.condition.text,
-          icon: this.weatherData2.current.condition.icon,
-          city: this.weatherData2?.location.name,
-          country: this.weatherData2?.location.country
-        };
-        console.log(this.weatherData2, 'clo');
+          text: this.weatherData.current.condition.text,
+          icon: this.weatherData.current.condition.icon,
+          country: this.weatherData.location.country,
+          city: this.weatherData.location.name
 
+        };
+
+        this.getWeekDayName();
+
+        const time = this.splitAndGetHour(this.weatherData.location.localtime, 2);
+
+        this.nightOrDayColor(time);
+        this.sunriseColor(time);
+        this.cloudyColor();
+
+        console.log(this.weatherData);
       });
+
   }
 
-  // private getWeatherData(cityName: string) {
-  //   this.weatherService.getWeatherData(cityName)
-  //     .subscribe({
-  //       next: (response: Weather) => {
-  //         this.weatherData = response;
-
-  //         this.test = {
-  //           temp: {
-  //             cur: this.weatherData?.current_observation.condition.temperature,
-
-  //           },
-  //           text: this.weatherData?.current_observation.condition.text,
-  //           city: this.weatherData?.location.city
-  //         };
-  //         console.log(this.weatherData);
+  splitAndGetHour(local: string, index: number): number {
+    let array = local.split(/(\s+)/);
+    let finalTime = array[index];
+    return parseFloat(finalTime.replace(':', '.'));
+  }
 
 
-  //         this.getIcons(this.test.text);
+  cloudyColor(): void {
+    if (
+      this.condition.text === 'Cloudy' ||
+      this.condition.text === 'Partly cloudy' ||
+      this.condition.text === 'Rain' ||
+      this.condition.text === 'Heavy rain' ||
+      this.condition.text === 'Overcast'
+    ) {
+      this.color = 'cloudy';
+    }
+  }
+
+  sunriseColor(time: number) {
+    const sunrise = this.splitAndGetHour(this.weatherData.forecast.forecastday[0].astro.sunrise, 0);
+    const sunset = this.splitAndGetHour(this.weatherData.forecast.forecastday[0].astro.sunset, 0);
+
+    if (time >= sunrise - 0.20 && time <= sunrise) {
+      this.color = 'sunrise';
+    }
+  }
+
+  nightOrDayColor(time: number): void {
+    const day = this.isDay(time);
+    if (!day) {
+      this.color = 'night';
+      return;
+    }
+    this.color = 'day';
+  }
+
+  isDay(time: number): boolean {
+    const timeInt = Math.round(time);
+    for (let item of this.weatherData.forecast.forecastday[0].hour) {
+      const hour = this.splitAndGetHour(item.time, 2);
+      if (hour === timeInt && item.is_day) {
+        return true;
+      }
+    }
+    return false;
+  }
 
 
-  //       }
-  //     });
-  // }
+
 
 }

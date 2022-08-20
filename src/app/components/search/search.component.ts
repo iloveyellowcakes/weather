@@ -17,7 +17,6 @@ export class SearchComponent implements OnInit {
     this.myForm = this.fb.group({
       search:["", Validators.max(15)],
     });
-
   }
 
   addNewItem(value: string) {

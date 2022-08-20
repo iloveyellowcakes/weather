@@ -1,11 +1,10 @@
 .weather-card {
-
   width: 100%;
 
   display: flex;
   justify-content: space-between;
 
-  &__title {
+  &__weekday {
     text-align: center;
   }
 
@@ -15,7 +14,7 @@
     border-radius: 2rem;
     box-shadow: 1px 2px 8px 1px rgb(0 0 0 / 3%);
 
-    min-width: 9.4rem;
+    width: 10rem;
     min-height: 14rem;
 
     display: grid;
@@ -24,14 +23,20 @@
     justify-items: center;
     align-content: center;
 
-    &__icons {
-      font-size: 4rem;
+    &__condition {
+      font-size: 1.4rem;
+      line-height: 1.6rem;
+      text-align: center;
 
+      height: 3.2rem;
+      padding: 0 1rem;
+    }
+
+    &__icons {
+      width: 5.4rem;
     }
     &__temp {
       font-size: 2rem;
-
-
     }
   }
 }

@@ -1,10 +1,33 @@
 <section class="details" *ngIf="weather">
-  <p>{{weather.current.feelslike_c}}°C</p>
-  <p>{{weather.current.humidity}}%</p>
-  <p>{{weather.current.wind_kph}}km/h</p>
-  <p>{{weather.current.cloud}}</p>
-  <p>{{weather.current.uv}}</p>
-  <p>{{weather.forecast.forecastday[0].day.daily_chance_of_rain}}%</p>
+  <ul class="details__list">
+    <li>
+      <p>Feels like</p>
+      <p>{{weather.current.feelslike_c | number: '1.0-0'}}°C</p>
+    </li>
+    <li>
+      <p>Humidity</p>
+
+      <p>{{weather.current.humidity}}%</p>
+    </li>
+    <li>
+      <p>Chance of rain</p>
+      <p>{{weather.forecast.forecastday[0].day.daily_chance_of_rain}}%</p>
+    </li>
+    <li>
+      <p>wind</p>
+      <p>{{weather.current.wind_kph}}km/h</p>
+
+    </li>
+    <li>
+      <p>Clouds</p>
+      <p>{{weather.current.cloud}}</p>
+    </li>
+    <li>
+      <p>Uv</p>
+      <p>{{weather.current.uv}}</p>
+    </li>
+
+  </ul>
 
 
 </section>

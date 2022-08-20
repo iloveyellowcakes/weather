@@ -1,52 +1,47 @@
-<main class="weather" *ngIf="weatherData2">
-  <section class="weather__search">
-    <app-search (newItemEvent)="addItem($event)" ></app-search>
-  </section>
+<div [class]="color" class="back">
+  <main class="weather" *ngIf="weatherData">
+    <section class="weather__search">
+      <app-search (newItemEvent)="addItem($event)" ></app-search>
+    </section>
 
-  <section class="weather__upper">
-    <article class="weather__upper__local">
-      <span class="weather__upper__local__icon">
-        <i class="fas fa-location-dot"></i>
-      </span>
-      <p class="weather__upper__local__city">{{ test2.city }}</p>
-      <!-- <p>{{test2.country}}</p> -->
-    </article>
+    <section class="weather__upper">
+      <article class="weather__upper__local">
+        <span class="weather__upper__local__icon">
+          <i class="fas fa-location-dot"></i>
+        </span>
+        <p class="weather__upper__local__city">{{ condition.city }}</p>
+      </article>
 
-    <article class="weather__upper__main">
-      <div class="weather__upper__main__temp">
-        <div class="weather__upper__main__temp__condition">
-          <span class="">
-            <img [src]="test2.icon" alt="">
-          </span>
-          <span> {{ test2.text }} </span>
+      <article class="weather__upper__main">
+        <div class="weather__upper__main__temp">
+          <div class="weather__upper__main__temp__condition">
+            <span class="">
+              <img [src]="condition.icon" alt="">
+            </span>
+            <span> {{ condition.text }} </span>
+          </div>
+          <p class="weather__upper__main__temp__degree">
+            {{ condition.temp.cur | number: '1.0-0' }}°C
+          </p>
+
+          <div>
+            <span class="weather__upper__main__temp__max-min">
+              <i class="fa-solid fa-angle-up"></i>
+              {{ condition.temp.max | number: '1.0-0'}}°C
+            </span>
+            <span class="weather__upper__main__temp__max-min">
+              <i class="fa-solid fa-angle-down"></i>
+              {{ condition.temp.min | number: '1.0-0' }}°C
+            </span>
+          </div>
+
         </div>
-        <p class="weather__upper__main__temp__degree">
-          {{ test2.temp.cur | number: '1.0-0' }}°C
-        </p>
+      </article>
+    </section>
+    <section class="weather__cards">
+      <app-card [weather]="weatherData" ></app-card>
+      <app-details [weather]="weatherData"></app-details>
+    </section>
 
-        <div>
-          <span class="weather__upper__main__temp__max-min">
-            <i class="fa-solid fa-angle-up"></i>
-            {{ test2.temp.max }}°C
-          </span>
-          <span class="weather__upper__main__temp__max-min">
-            <i class="fa-solid fa-angle-down"></i>
-            {{ test2.temp.min }}°C
-          </span>
-        </div>
-
-      </div>
-    </article>
-  </section>
-  <section class="weather__cards">
-    <app-card [weather]="weatherData2" ></app-card>
-    <button type="button" class="weather__cards__btn">
-      Previsão para 5 dias
-    </button>
-  </section>
-
-  <section>
-    <app-details [weather]="weatherData2"></app-details>
-  </section>
-
-</main>
+  </main>
+</div>
