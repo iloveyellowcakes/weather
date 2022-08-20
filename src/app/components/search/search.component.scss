@@ -2,7 +2,6 @@
   margin: 1rem auto;
   width: 100%;
 
-
   position: relative;
 
   input:-webkit-autofill,
@@ -16,13 +15,11 @@
     border-radius: 2rem;
 
     color: white;
-
     font-weight: 300;
 
+    padding: 1.5rem;
 
     width: 100%;
-
-    padding: 1.5rem;
   }
 
   &__btn {

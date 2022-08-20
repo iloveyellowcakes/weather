@@ -49,8 +49,8 @@
       justify-content: center;
 
       &__icon {
-        padding-right: 1.5rem;
         font-size: 2rem;
+        padding-right: 1.5rem;
       }
 
       &__city {
@@ -76,14 +76,15 @@
         justify-items: center;
 
         &__condition {
+          line-height: 1.8rem;
+
+          max-width: 23rem;
+
           display: flex;
           align-items: center;
           justify-content: space-around;
-          max-width: 23rem;
-          line-height: 1.8rem;
-
-
         }
+
         &__degree {
           font-size: 6.5rem;
           font-weight: 500;
@@ -107,13 +108,11 @@
     width: 100%;
     grid-area: card;
 
-
     &__btn {
       background: rgba(255, 255, 255, 0.14);
       border: none;
       border-radius: 2rem;
       box-shadow: 1px 2px 8px 1px rgb(0 0 0 / 3%);
-
 
       color: white;
       font-family: 'Poppins', sans-serif;
