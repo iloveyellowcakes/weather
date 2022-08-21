@@ -3,17 +3,11 @@
 
   display: grid;
   align-items: center;
-  grid-template-areas:
-    "search"
-    "main"
-    "card"
-  ;
-  grid-template-columns: 1fr;
-  grid-template-rows: 1fr 2fr 2fr;
+  grid-template-rows: 0.3fr 0.3fr 1.3fr 2fr;
 
   margin: 0 auto;
 
-  height: 100%;
+  min-height: 100vh;
   max-width: 36rem;
 
   @media (min-width: 320px) {
@@ -21,49 +15,62 @@
   }
 
   @media (min-width: 600px) {
-    max-width: 50rem;
     padding: 0;
+    max-width: 67rem;
 
+    column-gap: 3rem;
+    row-gap: 1rem;
     grid-template-areas:
       "search search"
+      "local card"
       "main card"
     ;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 10% 50% ;
+    // grid-template-rows: 10% 50% ;
 
   }
 
   &__search {
-    grid-area: search;
+    @media (min-width: 600px){
+      grid-area: search;
+    }
+  }
+
+  &__local {
+    @media (min-width: 600px){
+      grid-area: local;
+    }
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &__icon {
+      font-size: 2rem;
+      padding-right: 1.5rem;
+    }
+
+    &__city {
+      font-size: 2rem;
+      text-align: center;
+    }
   }
 
   &__upper {
 
-    grid-area: main;
+    height: 100%;
+    @media (min-width: 600px){
+      grid-area: main;
 
-    &__local {
-      margin-bottom: 3rem;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      &__icon {
-        font-size: 2rem;
-        padding-right: 1.5rem;
-      }
-
-      &__city {
-        font-size: 2.5rem;
-        text-align: center;
-      }
     }
+
+
 
     &__main {
       background-color: rgb(255 255 255 / 14%);
       border-radius: 50%;
 
-      height: 30rem;
+      height: 100%;
       width: 100%;
 
       display: flex;
@@ -83,10 +90,14 @@
           display: flex;
           align-items: center;
           justify-content: space-around;
+
+          &__icon {
+            width: 5rem;
+          }
         }
 
         &__degree {
-          font-size: 6.5rem;
+          font-size: 5rem;
           font-weight: 500;
         }
 
@@ -106,7 +117,9 @@
 
   &__cards {
     width: 100%;
-    grid-area: card;
+    @media (min-width: 600px){
+      grid-area: card;
+    }
 
     &__btn {
       background: rgba(255, 255, 255, 0.14);

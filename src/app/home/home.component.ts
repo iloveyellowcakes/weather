@@ -67,7 +67,7 @@ export class HomeComponent implements OnInit {
 
         this.nightOrDayColor(time);
         this.sunriseColor(time);
-        this.cloudyColor();
+        this.cloudyColor(time);
 
         console.log(this.weatherData);
       });
@@ -81,15 +81,27 @@ export class HomeComponent implements OnInit {
   }
 
 
-  cloudyColor(): void {
+  cloudyColor(time: number): void {
+    const day = this.isDay(time);
     if (
-      this.condition.text === 'Cloudy' ||
-      this.condition.text === 'Partly cloudy' ||
-      this.condition.text === 'Rain' ||
-      this.condition.text === 'Heavy rain' ||
-      this.condition.text === 'Overcast'
+      (this.condition.text === 'Cloudy' && day) ||
+      (this.condition.text === 'Partly cloudy' && day) ||
+      (this.condition.text === 'Rain' && day) ||
+      (this.condition.text === 'Heavy rain' && day) ||
+      (this.condition.text === 'Overcast' && day)
     ) {
-      this.color = 'cloudy';
+      this.color = 'cloudy-day';
+      return
+    }
+
+    if (
+      (this.condition.text === 'Cloudy' && !day) ||
+      (this.condition.text === 'Partly cloudy' && !day) ||
+      (this.condition.text === 'Rain' && !day) ||
+      (this.condition.text === 'Heavy rain' && !day) ||
+      (this.condition.text === 'Overcast' && !day)
+    ) {
+      this.color = 'cloudy-night';
     }
   }
 

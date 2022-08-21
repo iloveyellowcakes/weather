@@ -4,19 +4,18 @@
       <app-search (newItemEvent)="addItem($event)" ></app-search>
     </section>
 
+    <section class="weather__local">
+      <span class="weather__local__icon">
+        <i class="fas fa-location-dot"></i>
+      </span>
+      <p class="weather__local__city">{{ condition.city }}</p>
+    </section>
     <section class="weather__upper">
-      <article class="weather__upper__local">
-        <span class="weather__upper__local__icon">
-          <i class="fas fa-location-dot"></i>
-        </span>
-        <p class="weather__upper__local__city">{{ condition.city }}</p>
-      </article>
-
       <article class="weather__upper__main">
         <div class="weather__upper__main__temp">
           <div class="weather__upper__main__temp__condition">
             <span class="">
-              <img [src]="condition.icon" alt="">
+              <img [src]="condition.icon" alt="" class="weather__upper__main__temp__condition__icon">
             </span>
             <span> {{ condition.text }} </span>
           </div>
