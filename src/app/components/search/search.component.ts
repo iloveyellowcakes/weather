@@ -21,6 +21,7 @@ export class SearchComponent implements OnInit {
 
   addNewItem(value: string) {
     this.newItemEvent.emit(value);
+    // this.myForm.reset()
   }
 
 }

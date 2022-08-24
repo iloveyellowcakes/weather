@@ -1,3 +1,4 @@
+import { Observable, interval, finalize } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 
 import { Weather } from 'src/app/models/weather';
@@ -12,17 +13,28 @@ import { WeatherService } from '../services/weather/weather.service';
 export class HomeComponent implements OnInit {
 
   cityName: string = 'Araxá';
-
   weatherData!: Weather;
   condition!: any;
   color!: string;
+
+  loader: boolean = true;
 
   constructor(private weatherService: WeatherService) { }
 
   ngOnInit(): void {
     this.getWeatherData(this.cityName);
-    this.cityName = '';
+
+    interval(5 * 60 * 1000)
+      .subscribe(() => {
+        this.getWeatherData(this.cityName);
+
+        console.log(this.cityName);
+        console.log('oi');
+
+      });
   }
+
+
 
   getWeekDayName(): void {
     for (let item of this.weatherData.forecast.forecastday) {
@@ -35,87 +47,56 @@ export class HomeComponent implements OnInit {
     this.weatherData.forecast.forecastday[0].date = 'Today';
   }
 
-  addItem(newItem: string): void {
-    this.getWeatherData(newItem);
-    this.cityName = newItem;
+  getCity(city: string): void {
+    this.getWeatherData(city);
+    this.cityName = city;
   }
 
   private getWeatherData(cityName: string) {
     this.weatherService.getWeatherData(cityName)
+      .pipe(
+        finalize(() => this.loader = false)
+      )
       .subscribe((data: Weather) => {
         this.weatherData = data;
-
-
         this.condition = {
           temp: {
             cur: this.weatherData.current.temp_c,
             feelsLike: this.weatherData.current.feelslike_c,
             max: this.weatherData.forecast.forecastday[0].day.maxtemp_c,
             min: this.weatherData.forecast.forecastday[0].day.mintemp_c
-
           },
           text: this.weatherData.current.condition.text,
           icon: this.weatherData.current.condition.icon,
           country: this.weatherData.location.country,
           city: this.weatherData.location.name
-
         };
 
         this.getWeekDayName();
-
-        const time = this.splitAndGetHour(this.weatherData.location.localtime, 2);
-
-        this.nightOrDayColor(time);
-        this.sunriseColor(time);
-        this.cloudyColor(time);
+        this.nightOrDayColor();
+        this.sunriseColor();
+        this.cloudyColor();
 
         console.log(this.weatherData);
       });
 
   }
 
-  splitAndGetHour(local: string, index: number): number {
-    let array = local.split(/(\s+)/);
-    let finalTime = array[index];
-    return parseFloat(finalTime.replace(':', '.'));
-  }
+  cloudyColor(): void {
+    const day = this.weatherData.current.is_day;
+    const cloudy = this.isCloudy();
 
-
-  cloudyColor(time: number): void {
-    const day = this.isDay(time);
-    if (
-      (this.condition.text === 'Cloudy' && day) ||
-      (this.condition.text === 'Partly cloudy' && day) ||
-      (this.condition.text === 'Rain' && day) ||
-      (this.condition.text === 'Heavy rain' && day) ||
-      (this.condition.text === 'Overcast' && day)
-    ) {
+    if (cloudy && day) {
       this.color = 'cloudy-day';
-      return
+      return;
     }
-
-    if (
-      (this.condition.text === 'Cloudy' && !day) ||
-      (this.condition.text === 'Partly cloudy' && !day) ||
-      (this.condition.text === 'Rain' && !day) ||
-      (this.condition.text === 'Heavy rain' && !day) ||
-      (this.condition.text === 'Overcast' && !day)
-    ) {
+    if (!cloudy && !day) {
       this.color = 'cloudy-night';
     }
   }
 
-  sunriseColor(time: number) {
-    const sunrise = this.splitAndGetHour(this.weatherData.forecast.forecastday[0].astro.sunrise, 0);
-    const sunset = this.splitAndGetHour(this.weatherData.forecast.forecastday[0].astro.sunset, 0);
-
-    if (time >= sunrise - 0.20 && time <= sunrise) {
-      this.color = 'sunrise';
-    }
-  }
-
-  nightOrDayColor(time: number): void {
-    const day = this.isDay(time);
+  nightOrDayColor(): void {
+    const day = this.weatherData.current.is_day;
     if (!day) {
       this.color = 'night';
       return;
@@ -123,18 +104,31 @@ export class HomeComponent implements OnInit {
     this.color = 'day';
   }
 
-  isDay(time: number): boolean {
-    const timeInt = Math.round(time);
-    for (let item of this.weatherData.forecast.forecastday[0].hour) {
-      const hour = this.splitAndGetHour(item.time, 2);
-      if (hour === timeInt && item.is_day) {
-        return true;
-      }
+  sunriseColor() {
+    const time = this.splitAndGetHour(this.weatherData.location.localtime, 2);
+    const sunrise = this.splitAndGetHour(this.weatherData.forecast.forecastday[0].astro.sunrise, 0);
+    if (time >= sunrise - 0.20 && time <= sunrise) {
+      this.color = 'sunrise';
+    }
+  }
+
+  isCloudy(): boolean {
+    if (
+      this.condition.text === 'Cloudy' ||
+      this.condition.text === 'Partly cloudy' ||
+      this.condition.text === 'Rain' ||
+      this.condition.text === 'Heavy rain' ||
+      this.condition.text === 'Overcast'
+    ) {
+      return true;
     }
     return false;
   }
 
-
-
+  splitAndGetHour(local: string, index: number): number {
+    let array = local.split(/(\s+)/);
+    let finalTime = array[index];
+    return parseFloat(finalTime.replace(':', '.'));
+  }
 
 }

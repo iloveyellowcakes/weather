@@ -14,5 +14,12 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
 
+    &__condition {
+      font-size: 1.8rem;
+      &__icon {
+        padding-right: .9rem;
+      }
+    }
+
   }
 }

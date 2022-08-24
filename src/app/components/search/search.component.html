@@ -1,4 +1,8 @@
 <form [formGroup]="myForm" class="search" >
+  <label
+  for="search"
+  class="visually-hidden"
+  >Search</label>
   <input
     type="text"
     id="search"
@@ -7,8 +11,10 @@
   >
   <button
     type="submit"
+    aria-label="Search"
     class="search__btn"
     (click)="addNewItem(myForm.get('search')?.value)"
+
   >
     <i class="fa-solid fa-magnifying-glass search__btn__icon"></i>
   </button>

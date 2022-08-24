@@ -1,7 +1,11 @@
-<div [class]="color" class="back">
-  <main class="weather" *ngIf="weatherData">
+<div [class]="color" class="bb">
+
+  <main
+    class="weather"
+    *ngIf="weatherData"
+  >
     <section class="weather__search">
-      <app-search (newItemEvent)="addItem($event)" ></app-search>
+      <app-search (newItemEvent)="getCity($event)"></app-search>
     </section>
 
     <section class="weather__local">
@@ -10,36 +14,49 @@
       </span>
       <p class="weather__local__city">{{ condition.city }}</p>
     </section>
+
     <section class="weather__upper">
       <article class="weather__upper__main">
         <div class="weather__upper__main__temp">
           <div class="weather__upper__main__temp__condition">
             <span class="">
-              <img [src]="condition.icon" alt="" class="weather__upper__main__temp__condition__icon">
+              <img
+                [src]="condition.icon"
+                [alt]="condition.text"
+                class="weather__upper__main__temp__condition__icon"
+              />
             </span>
             <span> {{ condition.text }} </span>
           </div>
           <p class="weather__upper__main__temp__degree">
-            {{ condition.temp.cur | number: '1.0-0' }}°C
+            {{ condition.temp.cur | number: "1.0-0" }}°C
           </p>
 
           <div>
             <span class="weather__upper__main__temp__max-min">
               <i class="fa-solid fa-angle-up"></i>
-              {{ condition.temp.max | number: '1.0-0'}}°C
+              {{ condition.temp.max | number: "1.0-0" }}°C
             </span>
             <span class="weather__upper__main__temp__max-min">
               <i class="fa-solid fa-angle-down"></i>
-              {{ condition.temp.min | number: '1.0-0' }}°C
+              {{ condition.temp.min | number: "1.0-0" }}°C
             </span>
           </div>
         </div>
       </article>
+
     </section>
     <section class="weather__cards">
-      <app-card [weather]="weatherData" ></app-card>
+      <div class="weather__cards__day">
+        <app-card [weather]="weatherData"></app-card>
+      </div>
       <app-details [weather]="weatherData"></app-details>
+
     </section>
 
+    <div class="weather__cards__rights">
+      <p>Data by WeatherAPI.com</p>
+    </div>
   </main>
+
 </div>
