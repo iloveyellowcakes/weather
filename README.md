@@ -1,27 +1,30 @@
 # Weather
+Site responsivo de previsão do tempo.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.4.
+- Layout e codigo criados por mim.
+
+- Dados consumidos da API gratuita fornecida no [Rapidapi](rapidapi.com) por [WeatherAPI](WeatherAPI.com)
+
+- API foi feita em inglês, conseguentemente retorna os nomes da cidades da mesma forma. É necessario pesquisar o nomes originais das cidades para seu reconhecimento. 
+- Cidade incial: Araxá. Busque sua cidade no input search. 
+
+- Projeto feito com Angular CLI v13.3.4.
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- Run `ng serve` for a dev server. 
+- Navigate to `http://localhost:4200/`.
+- The application will automatically reload if you change any of the source files.
 
-## Code scaffolding
+## Dispositivos: 
+### Mobile
+![image](https://user-images.githubusercontent.com/85185271/186436561-853b2ff2-4351-4c8b-a47e-b051f320007e.png) ![image](https://user-images.githubusercontent.com/85185271/186437469-4c4c700f-d1af-460e-9db7-eb7c172092f0.png)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Desktop
+![image](https://user-images.githubusercontent.com/85185271/186436288-c64df423-dd9a-49a9-9ffb-12406b0d3f1e.png)
 
-## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
