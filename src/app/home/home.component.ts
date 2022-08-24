@@ -27,10 +27,6 @@ export class HomeComponent implements OnInit {
     interval(5 * 60 * 1000)
       .subscribe(() => {
         this.getWeatherData(this.cityName);
-
-        console.log(this.cityName);
-        console.log('oi');
-
       });
   }
 
@@ -76,8 +72,6 @@ export class HomeComponent implements OnInit {
         this.nightOrDayColor();
         this.sunriseColor();
         this.cloudyColor();
-
-        console.log(this.weatherData);
       });
 
   }

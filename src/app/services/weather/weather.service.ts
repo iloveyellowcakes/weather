@@ -14,17 +14,13 @@ export class WeatherService {
   ) { }
 
   getWeatherData(cityName: string): Observable<any> {
-    console.log(environment.weatherApiBaseUrl);
     return this.httpClient.get(environment.weatherApiBaseUrl, {
       headers: new HttpHeaders()
-        .set(environment.XRapidAPIHostHeaderName, environment.XRapidAPIHostHeaderValue)
-        .set(environment.XRapidAPIKeyHeaderName, environment.XRapidAPIKeyHeaderValue),
+      .set(environment.XRapidAPIHostHeaderName, environment.XRapidAPIHostHeaderValue)
+      .set(environment.XRapidAPIKeyHeaderName, environment.XRapidAPIKeyHeaderValue),
       params: new HttpParams()
       .set('q', cityName)
       .set('days', '3')
     });
   }
-
-
-
 }
