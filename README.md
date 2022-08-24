@@ -18,10 +18,10 @@ Site responsivo de previsão do tempo.
 
 ## Dispositivos: 
 ### Mobile
-![image](https://user-images.githubusercontent.com/85185271/186436561-853b2ff2-4351-4c8b-a47e-b051f320007e.png) ![image](https://user-images.githubusercontent.com/85185271/186437469-4c4c700f-d1af-460e-9db7-eb7c172092f0.png)
+
 
 ### Desktop
-![image](https://user-images.githubusercontent.com/85185271/186436288-c64df423-dd9a-49a9-9ffb-12406b0d3f1e.png)
+
 
 
 
