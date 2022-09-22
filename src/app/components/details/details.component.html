@@ -47,7 +47,12 @@
     </li>
     <li>
       <p>Uv</p>
-      <p class="details__list__condition">{{ weather.current.uv }}</p>
+      <p class="details__list__condition">
+        <span class="details__list__condition__icon">
+          <i class="fa-solid fa-sun"></i>
+        </span>
+        {{ weather.current.uv }}
+      </p>
     </li>
   </ul>
 </section>
